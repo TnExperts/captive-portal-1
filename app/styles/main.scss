@@ -1,0 +1,228 @@
+$icon-font-path: '../fonts/';
+$image-path: '../images/';
+
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/components-font-awesome/scss/font-awesome.scss";
+// endbower
+
+/*
+* Custom CSS Starts Here
+*/
+
+$josefin-font-path: $icon-font-path + 'josefin-sans/';
+@font-face {
+  font-family: 'Josefin Sans';
+  src: url($josefin-font-path + "JosefinSans-Light.ttf") format("truetype")
+}
+@font-face {
+  font-family: 'Josefin Sans Bold';
+  src: url($josefin-font-path + "JosefinSans-SemiBold.ttf") format("truetype")
+}
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+html{
+  min-height:100%;
+}
+
+/* Space out content a bit */
+body {
+  min-height:100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: 'Josefin Sans';
+  color: rgba(51, 51, 51, 0.9);
+}
+
+// Full Page Image
+// https://github.com/BlackrockDigital/startbootstrap-full
+.full {
+  background: url($image-path + 'background.jpg') no-repeat center center fixed;
+  -ms-background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.full:before {
+  content: " ";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background: rgba(157, 157, 157, 0.3);
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+  }
+}
+
+/* Custom page footer */
+.footer {
+  margin-top: 18%;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container{
+  margin-top: 5%;
+}
+
+// Login Page CSS
+.login {
+  position: relative;
+  display: table;
+  background: #fff;
+  border-radius: 4px;
+  padding: 0px;
+}
+.legend {
+  position: relative;
+  width: 100%;
+  display: block;
+  background: #FF7052;
+  padding: 15px;
+  color: #fff;
+  font-size: 2em;
+  border-radius: 4px 4px 0px 0px;
+}
+.legend:after {
+  content: "";
+  background-image: url($image-path + 'user.png');
+  background-size: 90px 90px;
+  background-repeat: no-repeat;
+  background-position: 100% 30%;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+.input {
+  position: relative;
+  width: 90%;
+  margin: 15px auto;
+}
+.input span {
+  position: absolute;
+  display: block;
+  color: #d4d4d4;
+  left: 10px;
+  top: 8px;
+  font-size: 20px;
+}
+.input input {
+  width: 100%;
+  padding: 10px 5px 10px 40px;
+  display: block;
+  border: 1px solid #EDEDED;
+  border-radius: 4px;
+  transition: 0.2s ease-out;
+  color: rgba(51, 51, 51, 0.83);
+  font-family: 'Josefin Sans Bold';
+  font-size: 1.1em;
+}
+.input input:focus {
+  padding: 10px 5px 10px 10px;
+  outline: 0;
+  border-color: #FF7052;
+}
+
+.input input[type="checkbox"]{
+  width: 20%;
+  float: left;
+}
+.input label{
+  width: 80%;
+  float: right;
+}
+.submit {
+  width: 45px;
+  height: 45px;
+  display: block;
+  margin: 0 auto 0 auto;
+  background: #fff;
+  border-radius: 100%;
+  border: 1px solid #FF7052;
+  color: #FF7052;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 7px #fff;
+  transition: 0.2s ease-out;
+}
+.submit:hover,
+.submit:focus {
+  background: #FF7052;
+  color: #fff;
+  outline: 0;
+}
+.feedback {
+  position: absolute;
+  bottom: 8%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: 'Josefin Sans Bold';
+  background: #2ecc71;
+  padding: 10px 0;
+  font-size: 1em;
+  display: none;
+  opacity: 0;
+}
+.feedback:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(46, 204, 113, 0);
+  border-bottom-color: #2ecc71;
+  border-width: 10px;
+  margin-left: -10px;
+}
+div.error:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(46, 204, 113, 0);
+  border-bottom-color: #E84946;
+  border-width: 10px;
+  margin-left: -10px;
+}
