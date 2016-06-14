@@ -17,17 +17,6 @@ $('#userForm').validator('validate').on('submit', function (event) {
   }
 });
 
-$(function() {
-
-  if(get_param("res") == "failed"){
-    formSubmitErrorActions();
-  }
-
-  $("#userForm").attr("action", "http://"+ get_param("sip") + ":9997/login");
-
-
-}());
-
 function setFeedbackText(html_text) {
   $(".feedback").html(html_text);
 }
@@ -68,16 +57,35 @@ function formInValidActions(){
   $(".feedback").addClass("error").delay(3000).fadeOut('slow');
 }
 
-function get_param(name) {
+function get_query_params() {
+  var queryParams = {};
   if (location.href.indexOf("?") >= 0)
   {
     var query=location.href.split("?")[1];
     var params=query.split("&");
     for (var i = 0; i < params.length; i ++) {
       var value_pair=params[i].split("=");
-      if (value_pair[0] == name)
-        return decodeURIComponent(value_pair[1]);
+      queryParams[value_pair[0]] = decodeURIComponent(value_pair[1]);
     }
   }
-  return "";
+  return queryParams;
 }
+
+
+$(function() {
+
+  var queryParams = get_query_params();
+
+  if(queryParams.res == "failed"){
+    formSubmitErrorActions();
+  }
+
+  console.log(queryParams);
+  Object.keys(queryParams).forEach(function (param) {
+    $("<input type='hidden' value='' />").attr("name", param).attr("value", queryParams[param]).appendTo("#input-hidden-fields");
+  });
+
+  $("#userForm").attr("action", "https://"+ queryParams.sip + ":9998/SubscriberPortal/hotspotlogin");
+
+
+}());
