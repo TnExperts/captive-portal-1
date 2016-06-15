@@ -85,7 +85,7 @@ $(function() {
     $("<input type='hidden' value='' />").attr("name", param).attr("value", queryParams[param]).appendTo("#input-hidden-fields");
   });
 
-  $("#userForm").attr("action", "https://"+ queryParams.sip + ":9998/SubscriberPortal/hotspotlogin");
+  $("#userForm").attr("action", "http://"+ queryParams.sip + ":9997/SubscriberPortal/hotspotlogin");
 
 
 }());
