@@ -46,7 +46,7 @@ function formSubmitSuccessActions(){
 }
 
 function formSubmitErrorActions(){
-  setFeedbackText("Something went wrong or you missed something<br/>Please try again...");
+  setFeedbackText("Either your username or password is wrong or <br/> device limit exceeded.");
   showFeedback().css({"background": "#E84946"}).before();
   $(".feedback").addClass("error").delay(3000).fadeOut('slow');
 }
@@ -78,6 +78,9 @@ $(function() {
 
   if(queryParams.res == "failed"){
     formSubmitErrorActions();
+
+    delete queryParams.res;
+    delete queryParams.auth;
   }
 
   console.log(queryParams);
