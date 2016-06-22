@@ -1,8 +1,10 @@
 $icon-font-path: '../fonts/';
 $image-path: '../images/';
+$active-font-dir: $icon-font-path + 'josefin-sans/';
 
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
 @import "bower_components/components-font-awesome/scss/font-awesome.scss";
 // endbower
 
@@ -10,14 +12,13 @@ $image-path: '../images/';
 * Custom CSS Starts Here
 */
 
-$josefin-font-path: $icon-font-path + 'josefin-sans/';
 @font-face {
   font-family: 'Josefin Sans';
-  src: url($josefin-font-path + "JosefinSans-Light.ttf") format("truetype")
+  src: url($active-font-dir + "JosefinSans-Light.ttf") format("truetype")
 }
 @font-face {
   font-family: 'Josefin Sans Bold';
-  src: url($josefin-font-path + "JosefinSans-SemiBold.ttf") format("truetype")
+  src: url($active-font-dir + "JosefinSans-SemiBold.ttf") format("truetype")
 }
 
 .browserupgrade {
@@ -66,8 +67,7 @@ body {
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 15px auto;
 }
 
 /* Custom page header */
@@ -78,14 +78,15 @@ body {
   h3 {
     margin-top: 0;
     margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
+    line-height: 30px;
+    font-weight: bold;
+    padding-bottom: 20px;
   }
 }
 
 /* Custom page footer */
 .footer {
-  margin-top: 18%;
+  margin-top: 25%;
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
@@ -126,17 +127,18 @@ body {
   right: 0;
   position: absolute;
 }
-
+.form-group {
+  margin: 0px;
+}
 .input {
-  position: relative;
-  width: 90%;
-  margin: 15px auto;
+  width: 100%;
+  margin-top: 20px;
 }
 .input span {
   position: absolute;
   display: block;
   color: #d4d4d4;
-  left: 10px;
+  left: 25px;
   top: 8px;
   font-size: 20px;
 }
@@ -187,7 +189,10 @@ body {
 }
 .feedback {
   position: absolute;
-  bottom: 8%;
+  top: 75%;
+  @media (max-width: $screen-sm) {
+    top: 78%;
+  }
   width: 100%;
   text-align: center;
   color: #fff;
@@ -226,3 +231,74 @@ div.error:before {
   border-width: 10px;
   margin-left: -10px;
 }
+
+// Custom checkbox style
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; top: 2px;
+  width: 17px; height: 17px;
+  border: 1px solid #aaa;
+  background: #f8f8f8;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: 3px; left: 4px;
+  font-size: 18px;
+  line-height: 0.8;
+  color: #09ad7e;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 1px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 1px solid #4778d9!important;
+}
+

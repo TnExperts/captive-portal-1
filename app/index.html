@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="description" content="A captive portal login page of 91springboard">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>91SpringBoard Captive Portal Login</title>
 
   <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
@@ -42,25 +42,22 @@
               <h3 class="text-muted text-center">Login</h3>
             </div>
 
-            <div class="input form-group">
-              <input type="text" id="emailField" name="username" placeholder="Email"
-                     required />
+            <div class="input form-group col-xs-12">
               <span><i class="fa fa-envelope-o"></i></span>
+              <input type="text" id="emailField" name="username" placeholder="Email" required />
             </div>
 
-            <div class="input form-group">
+            <div class="input form-group col-xs-12">
               <input type="password" id="passwordField" name="password" placeholder="Password" required/>
               <span><i class="fa fa-key"></i></span>
             </div>
 
-            <div id="input-hidden-fields">
+            <div class="input" id="input-hidden-fields">
             </div>
 
-            <div class="input form-group row">
-                <div class=" col-xs-10 col-xs-offset-1">
-                  <input type="checkbox" id="terms" required>
-                  <label>I accept the <a href="#">Terms of Service</a></label>
-                </div>
+            <div class="input form-group col-xs-12">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I accept the <a href="#">Terms of Service</a></label>
             </div>
 
             <button type="submit" class="submit">

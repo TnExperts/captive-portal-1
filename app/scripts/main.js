@@ -1,22 +1,5 @@
 "use strict";
 
-console.log('Welcome to 91springboard Captive Portal Login');
-
-$( ".input" ).focusin(function() {
-  $( this ).find( "span" ).animate({"opacity":"0"}, 200);
-});
-
-$( ".input" ).focusout(function() {
-  $( this ).find( "span" ).animate({"opacity":"1"}, 300);
-});
-
-$('#userForm').validator('validate').on('submit', function (event) {
-  if (event.isDefaultPrevented()) {
-    // handle the invalid form
-    formInValidActions();
-  }
-});
-
 function setFeedbackText(html_text) {
   $(".feedback").html(html_text);
 }
@@ -74,6 +57,23 @@ function get_query_params() {
 
 $(function() {
 
+  console.log('Welcome to 91springboard Captive Portal Login Console');
+
+  $( ".input" ).focusin(function() {
+    $( this ).find( "span" ).animate({"opacity":"0"}, 200);
+  });
+
+  $( ".input" ).focusout(function() {
+    $( this ).find( "span" ).animate({"opacity":"1"}, 300);
+  });
+
+  $('#userForm').validator('validate').on('submit', function (event) {
+    if (event.isDefaultPrevented()) {
+      // handle the invalid form
+      formInValidActions();
+    }
+  });
+
   var queryParams = get_query_params();
 
   if(queryParams.res == "failed"){
@@ -83,7 +83,6 @@ $(function() {
     delete queryParams.auth;
   }
 
-  console.log(queryParams);
   Object.keys(queryParams).forEach(function (param) {
     $("<input type='hidden' value='' />").attr("name", param).attr("value", queryParams[param]).appendTo("#input-hidden-fields");
   });
