@@ -161,8 +161,12 @@ $(function() {
     delete queryParams.auth;
   }
 
+  var params_required = ["url", "proxy", "uip", "client-mac"];
+
   Object.keys(queryParams).forEach(function (param) {
-    $("<input type='hidden' value='' />").attr("name", param).attr("value", queryParams[param]).appendTo("#input-hidden-fields");
+    if (params_required.indexOf(param) > -1 ){
+      $("<input type='hidden' value='' />").attr("name", param).attr("value", queryParams[param]).appendTo("#input-hidden-fields");
+    }
   });
 
   $("#userForm").attr("action", "http://52.77.65.17:9997/SubscriberPortal/hotspotlogin");
