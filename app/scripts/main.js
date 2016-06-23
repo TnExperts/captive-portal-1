@@ -161,10 +161,12 @@ $(function() {
     delete queryParams.auth;
   }
 
-  var params_required = ["url", "proxy", "uip", "client-mac"];
+  var params_required = ["url", "proxy", "uip", "client_mac"];
 
   Object.keys(queryParams).forEach(function (param) {
+
     if (params_required.indexOf(param) > -1 ){
+      console.log("Param '" + param + "' = " + queryParams[param]);
       $("<input type='hidden' value='' />").attr("name", param).attr("value", queryParams[param]).appendTo("#input-hidden-fields");
     }
   });
