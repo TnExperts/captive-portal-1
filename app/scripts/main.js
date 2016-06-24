@@ -171,7 +171,7 @@ $(function() {
     }
   });
 
-  $("#userForm").attr("action", "http://52.77.65.17:9997/SubscriberPortal/hotspotlogin");
+  $("#userForm").attr("action", "https://vsz.91springboard.com/submitForm");
 
   getInternalIP(function (ip) {
     console.log("Your internal IP ::  " + ip);
