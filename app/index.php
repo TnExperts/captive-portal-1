@@ -46,6 +46,18 @@ $linkstatus=$_POST['link-status'];
   <!-- build:js scripts/vendor/modernizr.js -->
   <script src="/bower_components/modernizr/modernizr.js"></script>
   <!-- endbuild -->
+
+  <script type="text/html">
+    <?php  echo $mac; ?>
+    <?php  echo $ip; ?>
+    <?php  echo $username; ?>
+    <?php  echo $linklogin; ?>
+    <?php  echo $linkorig; ?>
+    <?php  echo $error; ?>
+    <?php  echo $trial; ?>
+    <?php  echo $loginby; ?>
+
+  </script>
 </head>
 <body class="full">
   <!--[if lt IE 10]>
@@ -89,10 +101,11 @@ $linkstatus=$_POST['link-status'];
               <i class="fa fa-long-arrow-right"></i>
             </button>
 
-            <div class="feedback">
-            </div>
-
           </fieldset>
+
+          <div class="feedback <?php if($error) : echo 'error'?><?php endif; ?>">
+              <div ><?php echo $error; ?></div>
+          </div>
 
 
 

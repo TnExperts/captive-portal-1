@@ -198,7 +198,7 @@ body {
   background: #2ecc71;
   padding: 10px 0;
   font-size: 1em;
-  display: none;
+  display: block;
   opacity: 0;
 }
 .feedback:before {
@@ -216,6 +216,7 @@ body {
   margin-left: -10px;
 }
 div.error:before {
+  opacity: 1;
   bottom: 100%;
   left: 50%;
   border: solid transparent;

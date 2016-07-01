@@ -10,7 +10,7 @@ const $ = gulpLoadPlugins();
 const browserSync = browserSyncMod.create();
 const reload = browserSync.reload;
 
-gulp.task('styles', ['wiredep'], () => {
+gulp.task('styles', () => {
   return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -134,7 +134,6 @@ gulp.task('serve', ['styles', 'scripts', 'fonts', 'php-tmp', 'images-tmp', 'bowe
   });
 
   gulp.watch([
-    'app/*.php',
     'app/*.html',
     '.tmp/scripts/**/*.js',
     'app/images/**/*',
@@ -145,6 +144,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts', 'php-tmp', 'images-tmp', 'bowe
   gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
+  gulp.watch('app/*.php', ['php-tmp'])
 });
 
 gulp.task('serve:build', () => {

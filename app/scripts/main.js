@@ -4,55 +4,12 @@ function setFeedbackText(html_text) {
   $(".feedback").html(html_text);
 }
 
-function hideFeedback(){
-  return $(".feedback").hide().animate({"opacity":"1"}, 400);
-}
-
-function showFeedback() {
-  return $(".feedback").show().animate({"opacity":"1"}, 400);
-}
-
-function showLoader() {
-  $(".submit i").removeAttr('class').addClass("fa fa-spin fa-spinner").css({"color":"#fff"});
-}
-
-function hideLoader() {
-  $(".submit i").removeAttr('class').addClass("fa fa-long-arrow-right").css({"color":"#fff"});
-}
-
-function formSubmitSuccessActions(){
-  $(".submit i").removeAttr('class').addClass("fa fa-check").css({"color":"#fff"});
-  $(".submit").css({"background":"#2ecc71", "border-color":"#2ecc71"});
-  setFeedbackText("login successful <br/>redirecting...");
-  showFeedback().removeClass("error").css({"background": "#2ecc71"});;
-  $("input").css({"border-color":"#2ecc71"});
-}
-
-function formSubmitErrorActions(){
-  setFeedbackText("Either your username or password is wrong or <br/> device limit exceeded.");
-  showFeedback().css({"background": "#E84946"}).before();
-  $(".feedback").addClass("error").delay(3000).fadeOut('slow');
-}
-
 function formInValidActions(){
   setFeedbackText("You missed something <br/>or entered wrong value ...");
   showFeedback().css({"background": "#E84946"}).before();
   $(".feedback").addClass("error").delay(3000).fadeOut('slow');
 }
 
-function get_query_params() {
-  var queryParams = {};
-  if (location.href.indexOf("?") >= 0)
-  {
-    var query=location.href.split("?")[1];
-    var params=query.split("&");
-    for (var i = 0; i < params.length; i ++) {
-      var value_pair=params[i].split("=");
-      queryParams[value_pair[0]] = decodeURIComponent(value_pair[1]);
-    }
-  }
-  return queryParams;
-}
 
 $(function() {
 
