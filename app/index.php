@@ -55,7 +55,7 @@ $linkstatus=$_POST['link-status'];
     errorMessage = '<?php echo $error; ?>';
     <?php endif;?>
 
-    <?php if ($username !== ''): ?>
+    <?php if (isset($username) && $username !== ''): ?>
     // status page requested, set action url as logout url
     actionUrl = 'http://login.91sb.com/logout';
     <?php else: ?>
@@ -90,39 +90,7 @@ $linkstatus=$_POST['link-status'];
 
             <legend class="legend">91springboard</legend>
 
-            <?php if ($username !== ''): ?>
-
-              <div class="header">
-                <h3 class="text-muted text-center">Login</h3>
-              </div>
-
-              <div class="input form-group col-xs-12">
-                <span><i class="fa fa-envelope-o"></i></span>
-                <input type="text" id="emailField" name="username" placeholder="Email" required />
-              </div>
-
-              <div class="input form-group col-xs-12">
-                <input type="password" id="passwordField" name="password" placeholder="Password" required/>
-                <span><i class="fa fa-key"></i></span>
-              </div>
-
-              <div class="input" id="input-hidden-fields">
-                <input type="hidden" name="dst" value="<?php echo $linkorig; ?>"/>
-                <input type="hidden" name="popup" value="true"/>
-              </div>
-
-              <div class="input form-group col-xs-12">
-                  <input type="checkbox" id="terms" required>
-                  <label for="terms">I accept the <a href="#">Terms of Service</a></label>
-              </div>
-
-              <button type="submit" class="submit">
-                <i class="fa fa-long-arrow-right"></i>
-              </button>
-
-
-            <?php else: ?>
-
+            <?php if (isset($username) && $username !== ''): ?>
               <div class="header">
                 <h3 class="text-muted text-center">Status</h3>
               </div>
@@ -153,10 +121,41 @@ $linkstatus=$_POST['link-status'];
                   </tbody>
                 </table>
 
+                <button type="submit" class="submit" title="Logout">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+
+
               </div>
 
-              <button type="submit" class="submit" title="Logout">
-                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            <?php else: ?>
+
+              <div class="header">
+                <h3 class="text-muted text-center">Login</h3>
+              </div>
+
+              <div class="input form-group col-xs-12">
+                <span><i class="fa fa-envelope-o"></i></span>
+                <input type="text" id="emailField" name="username" placeholder="Email" required />
+              </div>
+
+              <div class="input form-group col-xs-12">
+                <input type="password" id="passwordField" name="password" placeholder="Password" required/>
+                <span><i class="fa fa-key"></i></span>
+              </div>
+
+              <div class="input" id="input-hidden-fields">
+                <input type="hidden" name="dst" value="<?php echo $linkorig; ?>"/>
+                <input type="hidden" name="popup" value="true"/>
+              </div>
+
+              <div class="input form-group col-xs-12">
+                <input type="checkbox" id="terms" required checked>
+                <label for="terms">I accept the <a href="#">Terms of Service</a></label>
+              </div>
+
+              <button type="submit" class="submit">
+                <i class="fa fa-long-arrow-right"></i>
               </button>
 
             <?php endif; ?>
@@ -177,7 +176,7 @@ $linkstatus=$_POST['link-status'];
       </div>
     </div>
   </div>
-  
+
 
   <!-- build:js scripts/vendor.js -->
   <!-- bower:js -->
