@@ -4,7 +4,7 @@ $ip=$_POST['ip'];
 $username=$_POST['username'];
 $linklogin=$_POST['link-login'];
 $linkorig=$_POST['link-orig'];
-$error=$_POST['error'];
+$error=$_GET['error'];
 $trial=$_POST['trial'];
 $loginby=$_POST['login-by'];
 $chapid=$_POST['chap-id'];
@@ -47,15 +47,11 @@ $linkstatus=$_POST['link-status'];
   <script src="/bower_components/modernizr/modernizr.js"></script>
   <!-- endbuild -->
 
-  <script type="text/html">
-    <?php  echo $mac; ?>
-    <?php  echo $ip; ?>
-    <?php  echo $username; ?>
-    <?php  echo $linklogin; ?>
-    <?php  echo $linkorig; ?>
-    <?php  echo $error; ?>
-    <?php  echo $trial; ?>
-    <?php  echo $loginby; ?>
+  <script type="text/javascript">
+    var errorMessage;
+    <?php if (isset($error)) {?>
+    errorMessage = '<?php echo $error; ?>';
+    <?php }?>
 
   </script>
 </head>
