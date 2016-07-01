@@ -19,6 +19,9 @@ $sessiontimeleft=$_POST['session-time-left'];
 $uptime=$_POST['uptime'];
 $refreshtimeout=$_POST['refresh-timeout'];
 $linkstatus=$_POST['link-status'];
+
+// custom variable to check whether to show status page or login page
+$status_page=$_POST['status_page'];
 ?>
 
 <!doctype html>
@@ -55,7 +58,7 @@ $linkstatus=$_POST['link-status'];
     errorMessage = '<?php echo $error; ?>';
     <?php endif;?>
 
-    <?php if (isset($username) && $username !== ''): ?>
+    <?php if (isset($status_page)): ?>
     // status page requested, set action url as logout url
     actionUrl = 'http://login.91sb.com/logout';
     <?php else: ?>
@@ -63,16 +66,22 @@ $linkstatus=$_POST['link-status'];
     actionUrl = 'http://login.91sb.com/login';
     <?php endif; ?>
 
-    <?php echo $username." =\n"?>
-    <?php echo $ip." =\n"?>
-    <?php echo $loginby." =\n"?>
-    <?php echo $macesc." =\n"?>
-    <?php echo $bytesinnice." =\n"?>
-    <?php echo $bytesoutnice." =\n"?>
-    <?php echo $sessiontimeleft." =\n"?>
-    <?php echo $uptime." =\n"?>
-    <?php echo $refreshtimeout." =\n"?>
-    <?php echo $linkstatus." =\n"?>
+  </script>
+
+  <script type="text/html">
+
+    <?php echo "Username= ".$username."\n"?>
+    <?php echo "IP= ".$ip."\n"?>
+    <?php echo "Loginby= ".$loginby."\n"?>
+    <?php echo "BytesDown= ".$bytesinnice."\n"?>
+    <?php echo "BytesUp= ".$bytesoutnice."\n"?>
+    <?php echo "SessionTimeLeft= ".$sessiontimeleft."\n"?>
+    <?php echo "Uptime= ".$uptime."\n"?>
+    <?php echo "RefreshTime= ".$refreshtimeout."\n"?>
+    <?php echo "Linkstatus= ".$linkstatus."\n"?>
+    <?php echo "Identity= ".$identity."\n"?>
+    <?php echo "Linkorig= ".$linkorig."\n"?>
+    <?php echo "LinkLogin= ".$linklogin."\n"?>
 
   </script>
 </head>
@@ -90,7 +99,7 @@ $linkstatus=$_POST['link-status'];
 
             <legend class="legend">91springboard</legend>
 
-            <?php if (isset($username) && $username !== ''): ?>
+            <?php if (isset($status_page)): ?>
               <div class="header">
                 <h3 class="text-muted text-center">Status</h3>
               </div>
@@ -114,10 +123,6 @@ $linkstatus=$_POST['link-status'];
                     <td>Uptime</td>
                     <td> <?php echo $uptime; ?></td>
                   </tr>
-                  <tr>
-                    <td>Refresh Time</td>
-                    <td> <?php echo $refreshtimeout; ?></td>
-                  </tr>
                   </tbody>
                 </table>
 
@@ -136,7 +141,8 @@ $linkstatus=$_POST['link-status'];
 
               <div class="input form-group col-xs-12">
                 <span><i class="fa fa-envelope-o"></i></span>
-                <input type="text" id="emailField" name="username" placeholder="Email" required />
+                <input type="text" id="emailField" name="username" placeholder="Email"
+                  <?php if (isset($username) && $username != ''): echo 'value="'.$username.'""'; endif;?> required />
               </div>
 
               <div class="input form-group col-xs-12">
@@ -162,8 +168,7 @@ $linkstatus=$_POST['link-status'];
 
           </fieldset>
 
-          <div class="feedback <?php if($error) : echo 'error'?><?php endif; ?>">
-              <div ><?php echo $error; ?></div>
+          <div class="feedback">
           </div>
 
 

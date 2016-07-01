@@ -35,12 +35,12 @@ function formSubmitSuccessActions(){
 function formSubmitErrorActions(errorText){
   setFeedbackText(errorText);
   showFeedback().css({"background": "#E84946"}).before();
-  $(".feedback").addClass("error").delay(3000).fadeOut('slow');
+  $(".feedback").addClass("error").delay(5000).fadeOut('slow');
 }
 
 
 function formInValidActions(){
-  setFeedbackText("You missed something <br/>or entered wrong value ...");
+  setFeedbackText("You missed something <br/>or entered wrong format value.");
   showFeedback().css({"background": "#E84946"}).before();
   $(".feedback").addClass("error").delay(3000).fadeOut('slow');
 }
@@ -51,7 +51,7 @@ $(function() {
   console.log('Welcome to 91springboard Captive Portal Login Console');
 
   if (errorMessage){
-    console.log(errorMessage);
+    console.log("Found error while login : " + errorMessage);
     formSubmitErrorActions(errorMessage);
   }
 

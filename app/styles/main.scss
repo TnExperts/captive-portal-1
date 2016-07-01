@@ -84,7 +84,7 @@ body {
 
 /* Custom page footer */
 .footer {
-  margin-top: 25%;
+  margin-top: 10%;
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
@@ -187,10 +187,7 @@ body {
 }
 .feedback {
   position: absolute;
-  top: 75%;
-  @media (max-width: $screen-sm) {
-    top: 78%;
-  }
+  top: 85%;
   width: 100%;
   text-align: center;
   color: #fff;
