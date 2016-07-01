@@ -1,14 +1,16 @@
 // generated on 2016-02-06 using generator-gulp-webapp 1.1.1
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
-import browserSync from 'browser-sync';
+import browserSyncMod from 'browser-sync';
 import del from 'del';
 import {stream as wiredep} from 'wiredep';
+import connect from 'gulp-connect-php';
 
 const $ = gulpLoadPlugins();
+const browserSync = browserSyncMod.create();
 const reload = browserSync.reload;
 
-gulp.task('styles', () => {
+gulp.task('styles', ['wiredep'], () => {
   return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -94,19 +96,45 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'build']));
 
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
-  browserSync({
-    notify: false,
-    port: 9000,
-    server: {
-      baseDir: ['.tmp', 'app'],
-      routes: {
-        '/bower_components': 'app/styles/bower_components'
-      }
-    }
+gulp.task('php-tmp', () => {
+  return gulp.src('app/*.php')
+      .pipe(gulp.dest('.tmp'));
+});
+
+gulp.task('bower-components-tmp', () => {
+  return gulp.src('app/bower_components/**/*')
+      .pipe(gulp.dest('.tmp/bower_components'));
+});
+
+gulp.task('images-tmp', () => {
+  return gulp.src('app/images/**/*')
+      .pipe($.if($.if.isFile, $.cache($.imagemin({
+        progressive: true,
+        interlaced: true,
+        // don't remove IDs from SVGs, they are often used
+        // as hooks for embedding and styling
+        svgoPlugins: [{cleanupIDs: false}]
+      }))
+          .on('error', function (err) {
+            console.log(err);
+            this.end();
+          })))
+      .pipe(gulp.dest('.tmp/images'));
+});
+
+
+gulp.task('serve', ['styles', 'scripts', 'fonts', 'php-tmp', 'images-tmp', 'bower-components-tmp'], () => {
+
+  connect.server({
+    base: '.tmp'
+  }, function (){
+    browserSync.init({
+      proxy: '127.0.0.1:8000'
+    });
   });
 
   gulp.watch([
+    'app/*.php',
     'app/*.html',
     '.tmp/scripts/**/*.js',
     'app/images/**/*',

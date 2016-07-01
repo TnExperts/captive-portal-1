@@ -2,11 +2,9 @@ $icon-font-path: '../fonts/';
 $image-path: '../images/';
 $active-font-dir: $icon-font-path + 'josefin-sans/';
 
-// bower:scss
-@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
-@import "bower_components/components-font-awesome/scss/font-awesome.scss";
-// endbower
+@import "app/bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "app/bower_components/components-font-awesome/scss/font-awesome.scss";
+
 
 /*
 * Custom CSS Starts Here
