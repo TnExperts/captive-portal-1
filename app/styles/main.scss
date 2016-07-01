@@ -231,6 +231,15 @@ div.error:before {
   margin-left: -10px;
 }
 
+.status-table{
+  margin: 20px;
+}
+
+table > tbody > tr > td {
+  font-weight: bold;
+  width: 50%;
+}
+
 // Custom checkbox style
 /* Base for label styling */
 [type="checkbox"]:not(:checked),

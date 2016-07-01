@@ -48,9 +48,16 @@ $linkstatus=$_POST['link-status'];
   <!-- endbuild -->
 
   <script type="text/javascript">
-    var errorMessage;
+    var errorMessage, actionUrl='http://login.91sb.com/login';
+
+    // error occured , set error message
     <?php if (isset($error)) {?>
     errorMessage = '<?php echo $error; ?>';
+    <?php }?>
+
+    // status page requested, set action url as logout url
+    <?php if (isset($username)) {?>
+    actionUrl = 'http://login.91sb.com/logout';
     <?php }?>
 
     <?php echo $username."\n"?>
@@ -80,33 +87,76 @@ $linkstatus=$_POST['link-status'];
 
             <legend class="legend">91springboard</legend>
 
-            <div class="header">
-              <h3 class="text-muted text-center">Login</h3>
-            </div>
+            <?php if (!isset($username)): ?>
 
-            <div class="input form-group col-xs-12">
-              <span><i class="fa fa-envelope-o"></i></span>
-              <input type="text" id="emailField" name="username" placeholder="Email" required />
-            </div>
+              <div class="header">
+                <h3 class="text-muted text-center">Login</h3>
+              </div>
 
-            <div class="input form-group col-xs-12">
-              <input type="password" id="passwordField" name="password" placeholder="Password" required/>
-              <span><i class="fa fa-key"></i></span>
-            </div>
+              <div class="input form-group col-xs-12">
+                <span><i class="fa fa-envelope-o"></i></span>
+                <input type="text" id="emailField" name="username" placeholder="Email" required />
+              </div>
 
-            <div class="input" id="input-hidden-fields">
-              <input type="hidden" name="dst" value="<?php echo $linkorig; ?>"/>
-              <input type="hidden" name="popup" value="true"/>
-            </div>
+              <div class="input form-group col-xs-12">
+                <input type="password" id="passwordField" name="password" placeholder="Password" required/>
+                <span><i class="fa fa-key"></i></span>
+              </div>
 
-            <div class="input form-group col-xs-12">
-                <input type="checkbox" id="terms" required>
-                <label for="terms">I accept the <a href="#">Terms of Service</a></label>
-            </div>
+              <div class="input" id="input-hidden-fields">
+                <input type="hidden" name="dst" value="<?php echo $linkorig; ?>"/>
+                <input type="hidden" name="popup" value="true"/>
+              </div>
 
-            <button type="submit" class="submit">
-              <i class="fa fa-long-arrow-right"></i>
-            </button>
+              <div class="input form-group col-xs-12">
+                  <input type="checkbox" id="terms" required>
+                  <label for="terms">I accept the <a href="#">Terms of Service</a></label>
+              </div>
+
+              <button type="submit" class="submit">
+                <i class="fa fa-long-arrow-right"></i>
+              </button>
+
+
+            <?php else: ?>
+
+              <div class="header">
+                <h3 class="text-muted text-center">Status</h3>
+              </div>
+
+              <div class="status-table">
+                <table class="table table-bordered">
+                  <tbody>
+                  <tr>
+                    <td>IP Address</td>
+                    <td> <?php echo $ip; ?></td>
+                  </tr>
+                  <tr>
+                    <td>Download Bytes</td>
+                    <td> <?php echo $bytesinnice; ?></td>
+                  </tr>
+                  <tr>
+                    <td>Upload Bytes</td>
+                    <td> <?php echo $bytesoutnice; ?></td>
+                  </tr>
+                  <tr>
+                    <td>Uptime</td>
+                    <td> <?php echo $uptime; ?></td>
+                  </tr>
+                  <tr>
+                    <td>Refresh Time</td>
+                    <td> <?php echo $refreshtimeout; ?></td>
+                  </tr>
+                  </tbody>
+                </table>
+
+              </div>
+
+              <button type="submit" class="submit" title="Logout">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+              </button>
+
+            <?php endif; ?>
 
           </fieldset>
 
