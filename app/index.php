@@ -48,28 +48,31 @@ $linkstatus=$_POST['link-status'];
   <!-- endbuild -->
 
   <script type="text/javascript">
-    var errorMessage, actionUrl='http://login.91sb.com/login';
+    var errorMessage, actionUrl;
 
+    <?php if (isset($error)):?>
     // error occured , set error message
-    <?php if (isset($error)) {?>
     errorMessage = '<?php echo $error; ?>';
-    <?php }?>
+    <?php endif;?>
 
+    <?php if ($username !== ''): ?>
     // status page requested, set action url as logout url
-    <?php if (isset($username)) {?>
     actionUrl = 'http://login.91sb.com/logout';
-    <?php }?>
+    <?php else: ?>
+    // login page requested
+    actionUrl = 'http://login.91sb.com/login';
+    <?php endif; ?>
 
-    <?php echo $username."\n"?>
-    <?php echo $ip."\n"?>
-    <?php echo $loginby."\n"?>
-    <?php echo $macesc."\n"?>
-    <?php echo $bytesinnice."\n"?>
-    <?php echo $bytesoutnice."\n"?>
-    <?php echo $sessiontimeleft."\n"?>
-    <?php echo $uptime."\n"?>
-    <?php echo $refreshtimeout."\n"?>
-    <?php echo $linkstatus."\n"?>
+    <?php echo $username." =\n"?>
+    <?php echo $ip." =\n"?>
+    <?php echo $loginby." =\n"?>
+    <?php echo $macesc." =\n"?>
+    <?php echo $bytesinnice." =\n"?>
+    <?php echo $bytesoutnice." =\n"?>
+    <?php echo $sessiontimeleft." =\n"?>
+    <?php echo $uptime." =\n"?>
+    <?php echo $refreshtimeout." =\n"?>
+    <?php echo $linkstatus." =\n"?>
 
   </script>
 </head>
@@ -87,7 +90,7 @@ $linkstatus=$_POST['link-status'];
 
             <legend class="legend">91springboard</legend>
 
-            <?php if (!isset($username)): ?>
+            <?php if ($username !== ''): ?>
 
               <div class="header">
                 <h3 class="text-muted text-center">Login</h3>
@@ -174,26 +177,7 @@ $linkstatus=$_POST['link-status'];
       </div>
     </div>
   </div>
-
-  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-  <!--
-  <script>
-    (function (b, o, i, l, e, r) {
-      b.GoogleAnalyticsObject = l;
-      b[l] || (b[l] =
-        function () {
-          (b[l].q = b[l].q || []).push(arguments)
-        });
-      b[l].l = +new Date;
-      e = o.createElement(i);
-      r = o.getElementsByTagName(i)[0];
-      e.src = 'https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e, r)
-    }(window, document, 'script', 'ga'));
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
-  </script>
-  -->
+  
 
   <!-- build:js scripts/vendor.js -->
   <!-- bower:js -->
