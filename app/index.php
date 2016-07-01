@@ -53,6 +53,17 @@ $linkstatus=$_POST['link-status'];
     errorMessage = '<?php echo $error; ?>';
     <?php }?>
 
+    <?php echo $username."\n"?>
+    <?php echo $ip."\n"?>
+    <?php echo $loginby."\n"?>
+    <?php echo $macesc."\n"?>
+    <?php echo $bytesinnice."\n"?>
+    <?php echo $bytesoutnice."\n"?>
+    <?php echo $sessiontimeleft."\n"?>
+    <?php echo $uptime."\n"?>
+    <?php echo $refreshtimeout."\n"?>
+    <?php echo $linkstatus."\n"?>
+
   </script>
 </head>
 <body class="full">
