@@ -32,19 +32,11 @@ function formSubmitSuccessActions(){
   $("input").css({"border-color":"#2ecc71"});
 }
 
-function formSubmitErrorActions(errorText){
+function showFormError(errorText){
   setFeedbackText(errorText);
   showFeedback().css({"background": "#E84946"}).before();
   $(".feedback").addClass("error").delay(5000).fadeOut('slow');
 }
-
-
-function formInValidActions(){
-  setFeedbackText("You missed something <br/>or entered wrong format value.");
-  showFeedback().css({"background": "#E84946"}).before();
-  $(".feedback").addClass("error").delay(3000).fadeOut('slow');
-}
-
 
 $(function() {
 
@@ -52,7 +44,7 @@ $(function() {
 
   if (errorMessage){
     console.log("Found error while login : " + errorMessage);
-    formSubmitErrorActions(errorMessage);
+    showFormError(errorMessage);
   }
 
   $( ".input" ).focusin(function() {
@@ -66,11 +58,21 @@ $(function() {
   $('#userForm').validator('validate').on('submit', function (event) {
     if (event.isDefaultPrevented()) {
       // handle the invalid form
-      formInValidActions();
+      showFormError("Oops, You missed something.");
     }
   });
 
-  $("#userForm").attr("action", actionUrl);
-  
+  var formActionUrl;
+  if (isUserLoggedIn) {
+    formActionUrl = 'http://' + hostname + '/logout';
+  }
+  else{
+    formActionUrl = 'http://' + hostname + '/login';
+  }
+
+  if (hostname) {
+    $("#userForm").attr("action", formActionUrl);
+  }
+
 
 }());

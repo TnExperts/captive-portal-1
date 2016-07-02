@@ -41,28 +41,50 @@
 
     <form class="hide" name="redirect" action="http://radius.91springboard.com/captive-portal" target="captive-portal"
           method="post">
+
+        <!-- Common Server Variables -->
+        <input type="hidden" name="hostname" value="$(hostname)">
+        <input type="hidden" name="identity" value="$(identity)">
+        <input type="hidden" name="login-by" value="$(login-by)">
+        <input type="hidden" name="server-address" value="$(server-address)">
+        <input type="hidden" name="server-name" value="$(server-name)">
+
+        <!-- Links Variables -->
+        <input type="hidden" name="link-login" value="$(link-login)">
+        <input type="hidden" name="link-login-only" value="$(link-login-only)">
+        <input type="hidden" name="link-logout" value="$(link-logout)">
+        <input type="hidden" name="link-status" value="$(link-status)">
+        <input type="hidden" name="link-orig" value="$(link-orig)">
+
+        <!-- General Client Information Variables -->
+        <input type="hidden" name="domain" value="$(domain)">
         <input type="hidden" name="mac" value="$(mac)">
         <input type="hidden" name="ip" value="$(ip)">
+        <input type="hidden" name="logged-in" value="$(logged-in)">
+        <input type="hidden" name="mac" value="$(mac)">
         <input type="hidden" name="username" value="$(username)">
-        <input type="hidden" name="link-login" value="$(link-login)">
-        <input type="hidden" name="link-orig" value="$(link-orig)">
-        <input type="hidden" name="error" value="$(error)">
-        <input type="hidden" name="trial" value="$(trial)">
-        <input type="hidden" name="chap-id" value="$(chap-id)">
-        <input type="hidden" name="chap-challenge" value="$(chap-challenge)">
-        <input type="hidden" name="link-login-only" value="$(link-login-only)">
-        <input type="hidden" name="link-orig-esc" value="$(link-orig-esc)">
-        <input type="hidden" name="mac-esc" value="$(mac-esc)">
-        <input type="hidden" name="identity" value="$(identity)">
-        <input type="hidden" name="bytes-in-nice" value="$(bytes-in-nice)">
-        <input type="hidden" name="bytes-out-nice" value="$(bytes-out-nice)">
-        <input type="hidden" name="session-time-left" value="$(session-time-left)">
-        <input type="hidden" name="uptime" value="$(uptime)">
-        <input type="hidden" name="refresh-timeout" value="$(refresh-timeout)">
-        <input type="hidden" name="link-status" value="$(link-status)">
 
-        <!-- This field is used as a decision parameter, whether to open a login form or status form in captive portal-->
-        <input type="hidden" name="status_page" value="true">
+        <!-- User Status Information Variables -->
+        <input type="hidden" name="idle-timeout" value="$(idle-timeout)">
+        <input type="hidden" name="idle-timeout-secs" value="$(idle-timeout-secs)">
+        <input type="hidden" name="refresh-timeout" value="$(refresh-timeout)">
+        <input type="hidden" name="refresh-timeout-secs" value="$(refresh-timeout-secs)">
+        <input type="hidden" name="session-time-left" value="$(session-time-left)">
+        <input type="hidden" name="session-time-left-secs" value="$(session-time-left-secs)">
+        <input type="hidden" name="uptime" value="$(uptime)">
+        <input type="hidden" name="uptime-secs" value="$(uptime-secs)">
+
+        <!-- Traffic Counters Variables -->
+        <input type="hidden" name="bytes-in" value="$(bytes-in)">
+        <input type="hidden" name="bytes-in-nice" value="$(bytes-in-nice)">
+        <input type="hidden" name="bytes-out" value="$(bytes-out)">
+        <input type="hidden" name="bytes-out-nice" value="$(bytes-out-nice)">
+
+        <!-- Miscellaneous Variables -->
+        <input type="hidden" name="error" value="$(error)">
+        <input type="hidden" name="error-orig" value="$(error-orig)">
+        <input type="hidden" name="popup" value="$(popup)">
+        <input type="hidden" name="link-redirect" value="$(link-redirect)">
 
         <input type="submit" value="continue">
     </form>

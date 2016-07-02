@@ -1,36 +1,37 @@
 <?php
-$mac=$_POST['mac'];
-$ip=$_POST['ip'];
-$username=$_POST['username'];
-$linklogin=$_POST['link-login'];
-$linkorig=$_POST['link-orig'];
-$error=$_POST['error'];
-$trial=$_POST['trial'];
-$loginby=$_POST['login-by'];
-$chapid=$_POST['chap-id'];
-$chapchallenge=$_POST['chap-challenge'];
-$linkloginonly=$_POST['link-login-only'];
-$linkorigesc=$_POST['link-orig-esc'];
-$macesc=$_POST['mac-esc'];
-$identity=$_POST['identity'];
-$bytesinnice=$_POST['bytes-in-nice'];
-$bytesoutnice=$_POST['bytes-out-nice'];
-$sessiontimeleft=$_POST['session-time-left'];
-$uptime=$_POST['uptime'];
-$refreshtimeout=$_POST['refresh-timeout'];
-$linkstatus=$_POST['link-status'];
 
-// custom variable to check whether to show status page or login page
-$status_page=$_POST['status_page'];
+$hostname =  $_POST['hostname'];
+$login_by = $_POST['login-by'];
+$link_login = $_POST['link-login'];
+$link_login_only = $_POST['link-login-only'];
+$link_logout = $_POST['link-logout'];
+$link_status = $_POST['link-status'];
+$link_orig = $_POST['link-orig'];
+$username = $_POST['username'];
+$error = $_POST['error'];
+$error_orig = $_POST['error-orig'];
+$logged_in = $_POST['logged-in'];
+$mac = $_POST['mac'];
+$ip = $_POST['ip'];
+$bytes_in_nice = $_POST['bytes-in-nice'];
+$bytes_out_nice = $_POST['bytes-out-nice'];
+$session_time_left = $_POST['session-time-left'];
+$uptime = $_POST['uptime'];
+$refresh_timeout = $_POST['refresh-timeout'];
+
 ?>
-
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="description" content="A captive portal login page of 91springboard">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>91SpringBoard Captive Portal Login</title>
+
+  <?php if (!empty($refresh_timeout)): ?>
+  <meta http-equiv="refresh" content="<?php echo $refresh_timeout; ?>">
+  <?php endif; ?>
+
+  <title>91Springboard Captive Portal</title>
 
   <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -51,37 +52,47 @@ $status_page=$_POST['status_page'];
   <!-- endbuild -->
 
   <script type="text/javascript">
-    var errorMessage, actionUrl;
+    function get_host(url){
+      if (url)
+        return url.replace(/^((\w+:)?\/\/[^\/]+\/?).*$/,'$1');
+      return '';
+    }
 
-    <?php if (isset($error)):?>
-    // error occured , set error message
-    errorMessage = '<?php echo $error; ?>';
-    <?php endif;?>
+    var errorMessage, actionUrl, isUserLoggedIn, hostname='<?php echo $hostname; ?>';
+    <?php
 
-    <?php if (isset($status_page)): ?>
-    // status page requested, set action url as logout url
-    actionUrl = 'http://login.91sb.com/logout';
-    <?php else: ?>
-    // login page requested
-    actionUrl = 'http://login.91sb.com/login';
-    <?php endif; ?>
+    if (!empty($error)):
+      echo "errorMessage = '$error'";
+    endif;
+
+    if ($logged_in == "yes"):
+      echo 'isUserLoggedIn = true';
+    else:
+      echo 'isUserLoggedIn = false';
+    endif;
+
+    ?>
 
   </script>
 
   <script type="text/html">
 
     <?php echo "Username= ".$username."\n"?>
+    <?php echo "Error= ".$error."\n"?>
+    <?php echo "Error-Orig= ".$error_orig."\n"?>
+    <?php echo "Logged-In= ".$logged_in."\n"?>
     <?php echo "IP= ".$ip."\n"?>
-    <?php echo "Loginby= ".$loginby."\n"?>
-    <?php echo "BytesDown= ".$bytesinnice."\n"?>
-    <?php echo "BytesUp= ".$bytesoutnice."\n"?>
-    <?php echo "SessionTimeLeft= ".$sessiontimeleft."\n"?>
+    <?php echo "Login-By= ".$login_by."\n"?>
+    <?php echo "Bytes-Down= ".$bytes_in_nice."\n"?>
+    <?php echo "Bytes-Up= ".$bytes_out_nice."\n"?>
+    <?php echo "Session-Time-Left= ".$session_time_left."\n"?>
     <?php echo "Uptime= ".$uptime."\n"?>
-    <?php echo "RefreshTime= ".$refreshtimeout."\n"?>
-    <?php echo "Linkstatus= ".$linkstatus."\n"?>
-    <?php echo "Identity= ".$identity."\n"?>
-    <?php echo "Linkorig= ".$linkorig."\n"?>
-    <?php echo "LinkLogin= ".$linklogin."\n"?>
+    <?php echo "Refresh-Time= ".$refresh_timeout."\n"?>
+    <?php echo "Link-Status= ".$link_status."\n"?>
+    <?php echo "Link-Orig= ".$link_orig."\n"?>
+    <?php echo "Link-Login= ".$link_login."\n"?>
+    <?php echo "Link-Logout= ".$link_logout."\n"?>
+    <?php echo "Link-Login-Only= ".$link_login_only."\n"?>
 
   </script>
 </head>
@@ -94,12 +105,42 @@ $status_page=$_POST['status_page'];
   <div class="container">
     <div class="row ">
       <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 login">
-        <form id="userForm" action="<?php echo $linkloginonly; ?>" role="form" data-toggle="validator" method="POST">
+        <form id="userForm" action="#" role="form" data-toggle="validator" method="POST">
           <fieldset>
 
             <legend class="legend">91springboard</legend>
 
-            <?php if (isset($status_page)): ?>
+            <?php if ($logged_in == "no"): ?>
+              <div class="header">
+                <h3 class="text-muted text-center">Login</h3>
+              </div>
+
+              <div class="input form-group col-xs-12">
+                <span><i class="fa fa-envelope-o"></i></span>
+                <input type="text" id="emailField" name="username" placeholder="Email/Username"
+                    <?php if (!empty($username)): echo 'value="'.$username.'""'; endif;?> required />
+              </div>
+
+              <div class="input form-group col-xs-12">
+                <input type="password" id="passwordField" name="password" placeholder="Password" required/>
+                <span><i class="fa fa-key"></i></span>
+              </div>
+
+              <div class="input" id="input-hidden-fields">
+                <input type="hidden" name="dst" value="<?php echo $link_orig; ?>"/>
+                <input type="hidden" name="popup" value="true"/>
+              </div>
+
+              <div class="input form-group col-xs-12">
+                <input type="checkbox" id="terms" required checked>
+                <label for="terms">I accept the <a href="#">Terms of Service</a></label>
+              </div>
+
+              <button type="submit" class="submit input" title="Login">
+                <i class="fa fa-sign-in"></i>
+              </button>
+
+            <?php else: ?>
               <div class="header">
                 <h3 class="text-muted text-center">Status</h3>
               </div>
@@ -113,11 +154,11 @@ $status_page=$_POST['status_page'];
                   </tr>
                   <tr>
                     <td>Download Bytes</td>
-                    <td> <?php echo $bytesinnice; ?></td>
+                    <td> <?php echo $bytes_in_nice; ?></td>
                   </tr>
                   <tr>
                     <td>Upload Bytes</td>
-                    <td> <?php echo $bytesoutnice; ?></td>
+                    <td> <?php echo $bytes_out_nice; ?></td>
                   </tr>
                   <tr>
                     <td>Uptime</td>
@@ -126,44 +167,21 @@ $status_page=$_POST['status_page'];
                   </tbody>
                 </table>
 
+                <div class="input" id="input-hidden-fields">
+                  <input type="hidden" name="erase-cookie" value="on">
+                </div>
+
                 <button type="submit" class="submit" title="Logout">
                   <i class="fa fa-sign-out" aria-hidden="true"></i>
                 </button>
 
+                <div style="text-align: center; padding-top: 15px;">
+                  <a href="http://radius.91springboard.com/users">
+                    <p> Click here to access USER PORTAL</p>
+                  </a>
+                </div>
 
               </div>
-
-            <?php else: ?>
-
-              <div class="header">
-                <h3 class="text-muted text-center">Login</h3>
-              </div>
-
-              <div class="input form-group col-xs-12">
-                <span><i class="fa fa-envelope-o"></i></span>
-                <input type="text" id="emailField" name="username" placeholder="Email"
-                  <?php if (isset($username) && $username != ''): echo 'value="'.$username.'""'; endif;?> required />
-              </div>
-
-              <div class="input form-group col-xs-12">
-                <input type="password" id="passwordField" name="password" placeholder="Password" required/>
-                <span><i class="fa fa-key"></i></span>
-              </div>
-
-              <div class="input" id="input-hidden-fields">
-                <input type="hidden" name="dst" value="<?php echo $linkorig; ?>"/>
-                <input type="hidden" name="popup" value="true"/>
-              </div>
-
-              <div class="input form-group col-xs-12">
-                <input type="checkbox" id="terms" required checked>
-                <label for="terms">I accept the <a href="#">Terms of Service</a></label>
-              </div>
-
-              <button type="submit" class="submit">
-                <i class="fa fa-long-arrow-right"></i>
-              </button>
-
             <?php endif; ?>
 
           </fieldset>
