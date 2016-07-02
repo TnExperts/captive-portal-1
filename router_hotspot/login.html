@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>91Springboard Captive Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="http://radius.91springboard.com/captive-portal/favicon.ico" />
+    <link rel="apple-touch-icon" href="http://radius.91springboard.com/captive-portal/apple-touch-icon.png">
+
+    <style type="text/css">
+        body {
+            margin:0;
+            padding:0;
+            overflow:hidden;
+            height:100%;
+            position:absolute;
+            width:100%;
+            display: flex;
+        }
+
+        iframe {
+            overflow:hidden;
+            height:100%;
+            width:100%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!--[if lt IE 10]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+        your browser</a> to improve your experience.</p>
+    <![endif]-->
+    ​
+    <iframe name="captive-portal" src="http://radius.91springboard.com/captive-portal" frameborder="0"></iframe>
+
+    <form class="hide" name="redirect" action="http://radius.91springboard.com/captive-portal" target="captive-portal"
+          method="post">
+        <input type="hidden" name="mac" value="$(mac)">
+        <input type="hidden" name="ip" value="$(ip)">
+        <input type="hidden" name="username" value="$(username)">
+        <input type="hidden" name="link-login" value="$(link-login)">
+        <input type="hidden" name="link-orig" value="$(link-orig)">
+        <input type="hidden" name="error" value="$(error)">
+        <input type="hidden" name="trial" value="$(trial)">
+        <input type="hidden" name="chap-id" value="$(chap-id)">
+        <input type="hidden" name="chap-challenge" value="$(chap-challenge)">
+        <input type="hidden" name="link-login-only" value="$(link-login-only)">
+        <input type="hidden" name="link-orig-esc" value="$(link-orig-esc)">
+        <input type="hidden" name="mac-esc" value="$(mac-esc)">
+        <input type="hidden" name="identity" value="$(identity)">
+        <input type="hidden" name="bytes-in-nice" value="$(bytes-in-nice)">
+        <input type="hidden" name="bytes-out-nice" value="$(bytes-out-nice)">
+        <input type="hidden" name="session-time-left" value="$(session-time-left)">
+        <input type="hidden" name="uptime" value="$(uptime)">
+        <input type="hidden" name="refresh-timeout" value="$(refresh-timeout)">
+        <input type="hidden" name="link-status" value="$(link-status)">
+        <input type="submit" value="continue">
+    </form>
+
+    <script language="JavaScript">
+        document.redirect.submit();
+    </script>
+
+</body>
+</html>
