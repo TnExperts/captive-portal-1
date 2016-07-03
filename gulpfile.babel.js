@@ -134,6 +134,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts', 'php-tmp', 'images-tmp', 'bowe
   });
 
   gulp.watch([
+    'app/*.php',
     'app/*.html',
     '.tmp/scripts/**/*.js',
     'app/images/**/*',

@@ -105,7 +105,8 @@ $refresh_timeout = $_POST['refresh-timeout'];
   <div class="container">
     <div class="row ">
       <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 login">
-        <form id="userForm" action="#" role="form" data-toggle="validator" method="POST">
+        <form id="userForm" name="userForm" action="#" role="form" data-toggle="validator" method="POST">
+
           <fieldset>
 
             <legend class="legend">91springboard</legend>
@@ -140,12 +141,14 @@ $refresh_timeout = $_POST['refresh-timeout'];
                 <i class="fa fa-sign-in"></i>
               </button>
 
+
             <?php else: ?>
               <div class="header">
                 <h3 class="text-muted text-center">Status</h3>
               </div>
 
               <div class="status-table">
+
                 <table class="table table-bordered">
                   <tbody>
                   <tr>
@@ -175,27 +178,87 @@ $refresh_timeout = $_POST['refresh-timeout'];
                   <i class="fa fa-sign-out" aria-hidden="true"></i>
                 </button>
 
-                <div style="text-align: center; padding-top: 15px;">
-                  <a href="http://radius.91springboard.com/users">
-                    <p> Click here to access USER PORTAL</p>
-                  </a>
+                <div class="feedback">
                 </div>
 
               </div>
+
+              <div class="change-password">
+
+                <div style="text-align: center; padding-top: 15px;">
+                  <button type="button" class="sbutton" data-toggle="modal"
+                          data-target="#change-password-modal" title="Change Login Password">Change Login Password</button>
+                </div>
+
+              </div>
+
             <?php endif; ?>
 
           </fieldset>
 
-          <div class="feedback">
-          </div>
-
-
-
-          <div class="footer">
-            <p class="text-center">♥ from the 91springboard team</p>
-          </div>
-
         </form>
+
+        <div class="footer">
+            <p class="text-center">♥ from the 91springboard team</p>
+        </div>
+
+        <?php if ($logged_in == "yes"): ?>
+          <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog"
+               aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="gridSystemModalLabel">Change Your Login Password</h4>
+                </div>
+
+                <div class="modal-body">
+
+                  <div class="row">
+
+                    <form id="changePasswordForm" action="#" name="changePasswordForm" role="form"
+                          data-toggle="validator" method="POST">
+
+                      <div class="input form-group col-xs-12">
+                        <input type="password" id="currentPasswordField" name="currentPasswordField"
+                               placeholder="Current Password" required/>
+                        <div class="help-block with-errors"></div>
+                        <span><i class="fa fa-key"></i></span>
+                      </div>
+
+                      <div class="input form-group col-xs-12">
+                        <input type="password" id="newPasswordField" name="newPasswordField"
+                               placeholder="New Password" required/>
+                        <div class="help-block with-errors"></div>
+                        <span><i class="fa fa-key"></i></span>
+                      </div>
+
+                      <div class="input form-group col-xs-12">
+                        <input type="password" id="confirmPasswordField" name="confirmPasswordField"
+                               data-match="#newPasswordField" data-match-error="Whoops, these don't match"
+                               placeholder="Confirm Password" required/>
+                        <div class="help-block with-errors"></div>
+                        <span><i class="fa fa-key"></i></span>
+                      </div>
+
+                    </form>
+
+                  </div>
+
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="sbutton" data-dismiss="modal">Close</button>
+                  <button type="button" class="sbutton">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php endif; ?>
+
       </div>
     </div>
   </div>

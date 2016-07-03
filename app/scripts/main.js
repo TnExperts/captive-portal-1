@@ -74,5 +74,10 @@ $(function() {
     $("#userForm").attr("action", formActionUrl);
   }
 
+  $('#change-password-modal').on('hidden.bs.modal', function (e) {
+    $('#changePasswordForm').validator('destroy');
+  }
+  );
+
 
 }());
