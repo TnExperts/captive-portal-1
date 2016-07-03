@@ -84,7 +84,8 @@ body {
 /* Custom page footer */
 .footer {
   margin-top: 5%;
-  padding-top: 19px;
+  padding-top: 20px;
+  padding-bottom: 5px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
@@ -130,7 +131,7 @@ body {
 
 .input {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 15px;
 
   span {
     position: absolute;
@@ -175,13 +176,16 @@ body {
   border: 1px solid #FF7052;
   color: #FF7052;
   padding: 5px;
-}
 
-.sbutton:hover,
-.sbutton:focus {
-  background: #FF7052;
-  color: #fff;
-  outline: 0;
+  &:hover {
+    background: #FF7052;
+    color: #fff;
+    outline: 0;
+  }
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 .submit {
@@ -197,16 +201,22 @@ body {
   cursor: pointer;
   box-shadow: 0px 0px 0px 7px #fff;
   transition: 0.2s ease-out;
+
+  &:hover {
+    background: #FF7052;
+    color: #fff;
+    outline: 0;
+  }
+
+  &:focus {
+    outline: 0;
+  }
 }
-.submit:hover,
-.submit:focus {
-  background: #FF7052;
-  color: #fff;
-  outline: 0;
-}
+
 .feedback {
   position: absolute;
-  top: 87%;
+  top: 88%;
+  z-index: 2;
   width: 100%;
   text-align: center;
   color: #fff;
@@ -255,6 +265,35 @@ table > tbody > tr > td {
   font-weight: bold;
   width: 50%;
 }
+
+.change-password{
+  text-align: center;
+}
+
+.loader {
+  background: #fff;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  background: rgba(157, 157, 157, 0.3);
+
+  svg {
+    display: block;
+    margin: 35% auto;
+  }
+}
+
+.modal-footer {
+  button {
+    margin: 0px 0px 0px 15px;
+  }
+}
+
 
 // Custom checkbox style
 /* Base for label styling */

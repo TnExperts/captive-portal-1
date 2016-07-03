@@ -9,27 +9,25 @@ function setFeedbackText(html_text) {
 }
 
 function hideFeedback(){
-  return $(".feedback").hide().animate({"opacity":"1"}, 400);
+  return $(".feedback").hide().animate({"opacity":"0"}, 400);
 }
 
 function showFeedback() {
   return $(".feedback").show().animate({"opacity":"1"}, 400);
 }
 
-function showLoader() {
-  $(".submit i").removeAttr('class').addClass("fa fa-spin fa-spinner").css({"color":"#fff"});
-}
-
 function hideLoader() {
-  $(".submit i").removeAttr('class').addClass("fa fa-long-arrow-right").css({"color":"#fff"});
+  return $(".loader").hide().animate({"display":"none"}, 400);
 }
 
-function formSubmitSuccessActions(){
-  $(".submit i").removeAttr('class').addClass("fa fa-check").css({"color":"#fff"});
-  $(".submit").css({"background":"#2ecc71", "border-color":"#2ecc71"});
-  setFeedbackText("login successful <br/>redirecting...");
-  showFeedback().removeClass("error").css({"background": "#2ecc71"});;
-  $("input").css({"border-color":"#2ecc71"});
+function showLoader() {
+  return $(".loader").show().animate({"display":"block"}, 400);
+}
+
+function showFormSuccess(successText){
+  setFeedbackText(successText);
+  showFeedback().removeClass("error").css({"background": "#2ecc71"});
+  $(".feedback").addClass("success").delay(5000).fadeOut('slow');
 }
 
 function showFormError(errorText){
@@ -38,9 +36,27 @@ function showFormError(errorText){
   $(".feedback").addClass("error").delay(5000).fadeOut('slow');
 }
 
+function resetPasswordForm() {
+  $('#changePasswordForm').clearForm().find('div.with-errors').html('');
+}
+
 $(function() {
 
   console.log('Welcome to 91springboard Captive Portal Login Console');
+
+  $.fn.clearForm = function() {
+    return this.each(function() {
+      var type = this.type, tag = this.tagName.toLowerCase();
+      if (tag == 'form')
+        return $(':input',this).clearForm();
+      if (type == 'text' || type == 'password' || tag == 'textarea')
+        this.value = '';
+      else if (type == 'checkbox' || type == 'radio')
+        this.checked = false;
+      else if (tag == 'select')
+        this.selectedIndex = -1;
+    });
+  };
 
   if (errorMessage){
     console.log("Found error while login : " + errorMessage);
@@ -74,10 +90,35 @@ $(function() {
     $("#userForm").attr("action", formActionUrl);
   }
 
-  $('#change-password-modal').on('hidden.bs.modal', function (e) {
-    $('#changePasswordForm').validator('destroy');
-  }
-  );
+  $('#change-password-modal').on('hide.bs.modal', function (e) {
+    resetPasswordForm();
+  });
+
+  $('#changePasswordForm').validator('validate').on('submit', function (e) {
+
+    if (e.isDefaultPrevented()) {
+      // handle the invalid form...
+    } else {
+      e.preventDefault();
+
+      var formData = $('#changePasswordForm').serialize();
+
+      $('#change-password-modal').modal('hide');
+
+      // show loader
+      showLoader();
+
+      $.post("http://radius.91springboard.com/users/change-auth-password.php", formData).done(function (res) {
+        hideLoader();
+        showFormSuccess('You login password changed successfully.');
+      }).fail(function (error) {
+        hideLoader();
+        showFormError(error.responseText);
+      });
+
+    }
+  });
+
 
 
 }());
