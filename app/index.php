@@ -19,7 +19,6 @@ $session_time_left = $_POST['session-time-left'];
 $uptime = $_POST['uptime'];
 $refresh_timeout = $_POST['refresh-timeout'];
 
-$username = "akshay.pratap@91springboard.com";
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -112,42 +111,8 @@ $username = "akshay.pratap@91springboard.com";
 
                     <legend class="legend">91springboard</legend>
 
-                    <?php if ($logged_in == "no"): ?>
-                        <div class="header">
-                            <h3 class="text-muted text-center">Login</h3>
-                        </div>
+                    <?php if ($logged_in == "yes"): ?>
 
-                        <div class="input form-group col-xs-12">
-                            <span><i class="fa fa-envelope-o"></i></span>
-                            <input type="text" id="emailField" name="username" placeholder="Email/Username"
-                                <?php if (!empty($username)): echo 'value="' . $username . '""'; endif; ?> required/>
-                        </div>
-
-                        <div class="input form-group col-xs-12">
-                            <input type="password" id="passwordField" name="password" placeholder="Password" required/>
-                            <span><i class="fa fa-key"></i></span>
-                        </div>
-
-                        <div id="input-hidden-fields">
-                            <input type="hidden" name="dst" value="<?php echo $link_orig; ?>"/>
-                            <input type="hidden" name="popup" value="true"/>
-                        </div>
-
-                        <div class="input form-group col-xs-12">
-                            <input type="checkbox" id="terms" required checked>
-                            <label for="terms">I accept the <a href="#">Terms of Service</a></label>
-                        </div>
-
-                        <div class="input form-group col-xs-12">
-                            <button type="submit" class="submit input" title="Login">
-                                <i class="fa fa-sign-in"></i>
-                            </button>
-                        </div>
-
-                        <div class="feedback"></div>
-
-
-                    <?php else: ?>
                         <div class="header">
                             <h3 class="text-muted text-center">Session Status</h3>
                         </div>
@@ -197,6 +162,40 @@ $username = "akshay.pratap@91springboard.com";
                             </button>
                         </div>
 
+                    <?php else: ?>
+                        <div class="header">
+                            <h3 class="text-muted text-center">Login</h3>
+                        </div>
+
+                        <div class="input form-group col-xs-12">
+                            <span><i class="fa fa-envelope-o"></i></span>
+                            <input type="text" id="emailField" name="username" placeholder="Email/Username"
+                                <?php if (!empty($username)): echo 'value="' . $username . '""'; endif; ?> required/>
+                        </div>
+
+                        <div class="input form-group col-xs-12">
+                            <input type="password" id="passwordField" name="password" placeholder="Password" required/>
+                            <span><i class="fa fa-key"></i></span>
+                        </div>
+
+                        <div id="input-hidden-fields">
+                            <input type="hidden" name="dst" value="<?php echo $link_orig; ?>"/>
+                            <input type="hidden" name="popup" value="true"/>
+                        </div>
+
+                        <div class="input form-group col-xs-12">
+                            <input type="checkbox" id="terms" required checked>
+                            <label for="terms">I accept the <a href="#">Terms of Service</a></label>
+                        </div>
+
+                        <div class="input form-group col-xs-12">
+                            <button type="submit" class="submit input" title="Login">
+                                <i class="fa fa-sign-in"></i>
+                            </button>
+                        </div>
+
+                        <div class="feedback"></div>
+
                     <?php endif; ?>
 
                 </fieldset>
@@ -207,7 +206,7 @@ $username = "akshay.pratap@91springboard.com";
                 <p class="text-center">♥ from the 91springboard team</p>
             </div>
 
-            <?php if (true): ?>
+            <?php if ( $logged_in == "yes"): ?>
                 <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog"
                      aria-labelledby="mySmallModalLabel">
                     <div class="modal-dialog modal-sm">
@@ -276,6 +275,7 @@ $username = "akshay.pratap@91springboard.com";
         </div>
     </div>
 
+    <?php if ( $logged_in == "yes"): ?>
     <div class="loader">
         <svg width='100px' height='100px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
              preserveAspectRatio="xMidYMid" class="uil-default">
@@ -342,6 +342,7 @@ $username = "akshay.pratap@91springboard.com";
             </rect>
         </svg>
     </div>
+    <?php endif; ?>
 
 </div>
 
