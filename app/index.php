@@ -1,23 +1,23 @@
 <?php
 
-$hostname = $_POST['hostname'];
-$login_by = $_POST['login-by'];
-$link_login = $_POST['link-login'];
-$link_login_only = $_POST['link-login-only'];
-$link_logout = $_POST['link-logout'];
-$link_status = $_POST['link-status'];
-$link_orig = $_POST['link-orig'];
-$username = $_POST['username'];
-$error = $_POST['error'];
-$error_orig = $_POST['error-orig'];
-$logged_in = $_POST['logged-in'];
-$mac = $_POST['mac'];
-$ip = $_POST['ip'];
-$bytes_in_nice = $_POST['bytes-in-nice'];
-$bytes_out_nice = $_POST['bytes-out-nice'];
-$session_time_left = $_POST['session-time-left'];
-$uptime = $_POST['uptime'];
-$refresh_timeout = $_POST['refresh-timeout'];
+$hostname = $_GET['hostname'];
+$login_by = $_GET['login-by'];
+$link_login = $_GET['link-login'];
+$link_login_only = $_GET['link-login-only'];
+$link_logout = $_GET['link-logout'];
+$link_status = $_GET['link-status'];
+$link_orig = $_GET['link-orig'];
+$username = $_GET['username'];
+$error = $_GET['error'];
+$error_orig = $_GET['error-orig'];
+$logged_in = $_GET['logged-in'];
+$mac = $_GET['mac'];
+$ip = $_GET['ip'];
+$bytes_in_nice = $_GET['bytes-in-nice'];
+$bytes_out_nice = $_GET['bytes-out-nice'];
+$session_time_left = $_GET['session-time-left'];
+$uptime = $_GET['uptime'];
+$refresh_timeout = $_GET['refresh-timeout'];
 
 ?>
 <!doctype html>
