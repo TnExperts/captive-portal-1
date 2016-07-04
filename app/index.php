@@ -62,13 +62,13 @@ $refresh_timeout = $_GET['refresh-timeout'];
         <?php
 
         if (!empty($error)):
-            echo "errorMessage = '$error'";
+            echo "errorMessage = '$error';";
         endif;
 
         if ($logged_in == "yes"):
-            echo 'isUserLoggedIn = true';
+            echo 'isUserLoggedIn = true;';
         else:
-            echo 'isUserLoggedIn = false';
+            echo 'isUserLoggedIn = false;';
         endif;
 
         ?>
