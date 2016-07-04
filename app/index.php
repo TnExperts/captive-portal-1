@@ -175,7 +175,12 @@ $refresh_timeout_secs = $_GET['refresh-timeout-secs'];
                         </div>
 
                         <div id="input-hidden-fields">
-                            <input type="hidden" name="dst" value="<?php echo $link_orig; ?>"/>
+                            <input type="hidden" name="dst" value="<?php
+                            if (empty($link_orig)):
+                                echo $link_status;
+                            else:
+                                echo $link_orig;
+                            endif; ?>"/>
                             <input type="hidden" name="popup" value="true"/>
                         </div>
 
