@@ -27,11 +27,6 @@ $refresh_timeout_secs = $_GET['refresh-timeout-secs'];
     <meta charset="utf-8">
     <meta name="description" content="A captive portal login page of 91springboard">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <?php if (!empty($refresh_timeout_secs)): ?>
-        <meta http-equiv="refresh" content="<?php echo $refresh_timeout_secs; ?>">
-    <?php endif; ?>
-
     <title>91Springboard Captive Portal</title>
 
     <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'/>
