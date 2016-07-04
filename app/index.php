@@ -18,6 +18,7 @@ $bytes_out_nice = $_GET['bytes-out-nice'];
 $session_time_left = $_GET['session-time-left'];
 $uptime = $_GET['uptime'];
 $refresh_timeout = $_GET['refresh-timeout'];
+$refresh_timeout_secs = $_GET['refresh-timeout-secs'];
 
 ?>
 <!doctype html>
@@ -27,8 +28,8 @@ $refresh_timeout = $_GET['refresh-timeout'];
     <meta name="description" content="A captive portal login page of 91springboard">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <?php if (!empty($refresh_timeout)): ?>
-        <meta http-equiv="refresh" content="<?php echo $refresh_timeout; ?>">
+    <?php if (!empty($refresh_timeout_secs)): ?>
+        <meta http-equiv="refresh" content="<?php echo $refresh_timeout_secs; ?>">
     <?php endif; ?>
 
     <title>91Springboard Captive Portal</title>
