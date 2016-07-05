@@ -20,6 +20,8 @@ $uptime = $_GET['uptime'];
 $refresh_timeout = $_GET['refresh-timeout'];
 $refresh_timeout_secs = $_GET['refresh-timeout-secs'];
 
+$redirect_url = "https://events.91springboard.com";
+
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -57,11 +59,11 @@ $refresh_timeout_secs = $_GET['refresh-timeout-secs'];
         var errorMessage, actionUrl, isUserLoggedIn, hostname = '<?php echo $hostname; ?>';
         <?php
 
-        if (!empty($error)):
+        if(!empty($error)):
             echo "errorMessage = '$error';";
         endif;
 
-        if ($logged_in == "yes"):
+        if($logged_in == "yes"):
             echo 'isUserLoggedIn = true;';
         else:
             echo 'isUserLoggedIn = false;';
@@ -107,7 +109,7 @@ $refresh_timeout_secs = $_GET['refresh-timeout-secs'];
 
                     <legend class="legend">91springboard</legend>
 
-                    <?php if ($logged_in == "yes"): ?>
+                    <?php if($logged_in == "yes"): ?>
 
                         <div class="header">
                             <h3 class="text-muted text-center">Session Status</h3>
@@ -166,7 +168,7 @@ $refresh_timeout_secs = $_GET['refresh-timeout-secs'];
                         <div class="input form-group col-xs-12">
                             <span><i class="fa fa-envelope-o"></i></span>
                             <input type="text" id="emailField" name="username" placeholder="Email/Username"
-                                <?php if (!empty($username)): echo 'value="' . $username . '""'; endif; ?> required/>
+                                <?php if(!empty($username)): echo 'value="' . $username . '""'; endif; ?> required/>
                         </div>
 
                         <div class="input form-group col-xs-12">
@@ -176,10 +178,12 @@ $refresh_timeout_secs = $_GET['refresh-timeout-secs'];
 
                         <div id="input-hidden-fields">
                             <input type="hidden" name="dst" value="<?php
-                            if (empty($link_orig)):
-                                echo $link_status;
-                            else:
+                            if(!empty($redirect_url)):
+                                echo $redirect_url;
+                            elseif(!empty($link_orig)):
                                 echo $link_orig;
+                            else:
+                                echo $link_status;
                             endif; ?>"/>
                             <input type="hidden" name="popup" value="true"/>
                         </div>
@@ -207,7 +211,7 @@ $refresh_timeout_secs = $_GET['refresh-timeout-secs'];
                 <p class="text-center">♥ from the 91springboard team</p>
             </div>
 
-            <?php if ( $logged_in == "yes"): ?>
+            <?php if( $logged_in == "yes"): ?>
                 <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog"
                      aria-labelledby="mySmallModalLabel">
                     <div class="modal-dialog modal-sm">
