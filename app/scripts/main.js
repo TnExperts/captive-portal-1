@@ -108,7 +108,7 @@ $(function() {
       // show loader
       showLoader();
 
-      $.post("http://radius.91springboard.com/users/change-auth-password.php", formData).done(function (res) {
+      $.post("http://radius.91springboard.com/admin/daloradius-users/change-auth-password.php", formData).done(function (res) {
         hideLoader();
         showFormSuccess('You login password changed successfully.');
       }).fail(function (error) {
